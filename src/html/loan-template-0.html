@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ title }}</title>
+</head>
+<body>
+<h2>{{ form_title }}</h2>
+
+<form action="{{ form_action }}" method="post">
+    <fieldset>
+        <legend>Applicant Information:</legend>
+        First name:<br>
+        <input type="text" name="firstName" value="{{ applicant.first_name }}" required>
+        <br>
+        Last name:<br>
+        <input type="text" name="lastName" value="{{ applicant.last_name }}" required>
+        <br>
+        Date of Birth:<br>
+        <input type="date" name="dob" value="{{ applicant.dob }}" required>
+        <br>
+        Email:<br>
+        <input type="email" name="email" value="{{ applicant.email }}" required>
+        <br>
+        Phone:<br>
+        <input type="tel" name="phone" value="{{ applicant.phone }}">
+        <br>
+        Address:<br>
+        <textarea name="address" required>{{ applicant.address }}</textarea>
+        <br>
+    </fieldset>
+
+    <fieldset>
+        <legend>Financial Information:</legend>
+        Employment Status:<br>
+        <select name="employmentStatus" required>
+            {% for status in employment_statuses %}
+            <option value="{{ status }}" {% if status == applicant.employment_status %}selected{% endif %}>{{ status }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        Annual Income:<br>
+        <input type="number" name="annualIncome" value="{{ applicant.annual_income }}" required>
+        <br>
+        Other Income:<br>
+        <input type="number" name="otherIncome" value="{{ applicant.other_income | default(0) }}">
+        <br>
+        Monthly Expenses:<br>
+        <input type="number" name="monthlyExpenses" value="{{ applicant.monthly_expenses | default(0) }}">
+        <br>
+    </fieldset>
+
+    <fieldset>
+        <legend>Loan Details:</legend>
+        Loan Amount:<br>
+        <input type="number" name="loanAmount" value="{{ loan_details.amount }}" required>
+        <br>
+        Loan Purpose:<br>
+        <select name="loanPurpose" required>
+            {% for purpose, label in loan_purposes.items() %}
+            <option value="{{ purpose }}" {% if purpose == loan_details.purpose %}selected{% endif %}>{{ label }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        Loan Term (in years):<br>
+        <input type="number" name="loanTerm" value="{{ loan_details.term }}" required>
+        <br>
+        Interest Rate (optional):<br>
+        <input type="text" name="interestRate" value="{{ loan_details.interest_rate | default('') }}" placeholder="e.g., 5.5%">
+        <br>
+    </fieldset>
+    
+    <input type="submit" value="Submit Application">
+</form>
+
+</body>
+</html>

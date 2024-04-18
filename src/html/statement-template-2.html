@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank Statement</title>
+    <style>
+        body { font-family: Arial, sans-serif; font-size: 14px; }
+        .header { text-align: center; margin-bottom: 20px; }
+        .statement-details, .transaction-details { width: 100%; border-collapse: collapse; }
+        .statement-details th, .statement-details td, .transaction-details th, .transaction-details td { border: 1px solid #ddd; padding: 8px; }
+        .statement-details th, .transaction-details th { background-color: #f2f2f2; }
+        .transaction-row:nth-child(even) { background-color: #f9f9f9; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Bank Statement</h1>
+        <p>For {{ name }}</p>
+    </div>
+
+    <table class="statement-details">
+        <tr>
+            <th>Account Number</th>
+            <td>{{ Account_Number }}</td>
+            <th>Statement Date</th>
+            <td>{{ Statement_Date }}</td>
+        </tr>
+        <tr>
+            <th>Period Covered</th>
+            <td>{{ Period_Covered }}</td>
+            <th>Account Type</th>
+            <td>{{ Account_Type }}</td>
+        </tr>
+        <tr>
+            <th>Opening Balance</th>
+            <td>{{ Opening_Balance }}</td>
+            <th>Closing Balance</th>
+            <td>{{ Closing_Balance }}</td>
+        </tr>
+    </table>
+
+    <h2>Transaction Details</h2>
+    <table class="transaction-details">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Description</th>
+                <th>Credit</th>
+                <th>Debit</th>
+                <th>Balance</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for transaction in transactions %}
+                <tr class="transaction-row">
+                    <td>{{ transaction.Date }}</td>
+                    <td>{{ transaction.Description }}</td>
+                    <td>{{ transaction.Credit }}</td>
+                    <td>{{ transaction.Debit }}</td>
+                    <td>{{ transaction.Balance }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <p>Total Credit Amount: {{ Total_Credit_Amount }}</p>
+    <p>Total Debit Amount: {{ Total_Debit_Amount }}</p>
+    <p>Number of Transactions: {{ Number_Transactions }}</p>
+</body>
+</html>
