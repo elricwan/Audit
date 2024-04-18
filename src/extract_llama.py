@@ -6,10 +6,10 @@ from typing import Dict
 import re
 import time
 
-from agents.llama_client import GradioAPIClient
+from agents.dbrx_client import GradioAPIClient
 
 
-api_url = "https://4be79c3628de2c63ed-llama2-70b.test-playground-inference.netmind.ai/"
+api_url = "https://16c187ae810a38fd56-dbrx-instruct.test-playground-inference.netmind.ai/"
 client = GradioAPIClient(api_url)
 request = """Now, you are a Audit assistant who can help user to extract information from text.
 ## You must follow all the requirements to modify the draft:
@@ -46,11 +46,14 @@ def extract_dict_from_json(text: str):
 
     return extracted_text[0].strip() 
 
-with open('latex_info.json', 'r') as f:
+with open('json/latex_info.json', 'r') as f:
     latex_info = json.load(f)
 
 extract_llama = {}
+idx = 0
 for key in latex_info:
+    idx += 1
+    print(idx)
     status = 0
     while status == 0:
         try:
@@ -65,5 +68,5 @@ for key in latex_info:
             time.sleep(5)
             status = 0
 
-with open('json/extract_llama.json', 'w') as f:
+with open('json/extract_dbrx.json', 'w') as f:
     json.dump(extract_llama, f)
