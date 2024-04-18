@@ -55,6 +55,7 @@ for key in latex_info:
     idx += 1
     print(idx)
     status = 0
+    time.sleep(60)
     while status == 0:
         try:
             response = client.run(
@@ -65,7 +66,7 @@ for key in latex_info:
             extract_llama[key] = ans
             status = 1
         except:
-            time.sleep(5)
+            time.sleep(60)
             status = 0
 
 with open('json/extract_dbrx.json', 'w') as f:
