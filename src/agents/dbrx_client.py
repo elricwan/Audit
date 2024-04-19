@@ -6,7 +6,7 @@ from typing import Dict
 
 from gradio_client import Client
 
-class GradioAPIClient:
+class dbrx_GradioAPIClient:
     """
     The Gradio API client which uses a custom API to generate responses to plain text messages.
     """
@@ -28,7 +28,6 @@ class GradioAPIClient:
         self.api_url = api_url
         self.client = Client(api_url)
         self.default_params = {
-            "Max new tokens": 1024,
             "Temperature": 0.1,
         }
         self.default_params.update(default_params)
@@ -54,17 +53,9 @@ class GradioAPIClient:
         Exception
             If there is an error while making the request to the API.
         """
-        params = self.default_params.copy()
-        params.update({
-            "message": message,
-            "request": request_description,
-            "api_name": "/chat"  # Assuming '/chat' is the endpoint for message handling
-        })
-
         count = 0
         while count < 10:
             try:
-                #result = self.client.predict(**params)
                 result = self.client.predict(
                     message,
                     request_description,
@@ -93,7 +84,7 @@ class GradioAPIClient:
 # Example of using the GradioAPIClient
 if __name__ == "__main__":
     api_url = "https://16c187ae810a38fd56-dbrx-instruct.test-playground-inference.netmind.ai/"
-    client = GradioAPIClient(api_url)
+    client = dbrx_GradioAPIClient(api_url)
     response = client.run(
         message="""
                 The given text is:

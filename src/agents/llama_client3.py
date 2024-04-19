@@ -6,7 +6,7 @@ from typing import Dict
 
 from gradio_client import Client
 
-class llama2_GradioAPIClient:
+class llama3_GradioAPIClient:
     """
     The Gradio API client which uses a custom API to generate responses to plain text messages.
     """
@@ -28,9 +28,11 @@ class llama2_GradioAPIClient:
         self.api_url = api_url
         self.client = Client(api_url)
         self.default_params = {
-            "param_3": 0.9,
-            "param_4": 1024,
-            "param_5": 10
+            "param_3":1024,
+		    "param_4":0.1,
+		    "param_5":0.9,
+		    "param_6":10,
+		    "param_7":1.2,
         }
         self.default_params.update(default_params)
 
@@ -86,8 +88,8 @@ class llama2_GradioAPIClient:
 
 # Example of using the GradioAPIClient
 if __name__ == "__main__":
-    api_url = "https://2c76d788cbff087d88-llama2-70b.test-playground-inference-2.netmind.ai/"
-    client = llama2_GradioAPIClient(api_url)
+    api_url = "https://ff877aa74034a0ee21-llama3-8b.test-playground-inference.netmind.ai/"
+    client = llama3_GradioAPIClient(api_url)
     response = client.run(
         message="""
                 The given text is:
