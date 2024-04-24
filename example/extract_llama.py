@@ -8,12 +8,16 @@ import time
 
 from agents.dbrx_client import dbrx_GradioAPIClient
 from agents.llama_client import llama2_GradioAPIClient
+from agents.llama_client3 import llama3_GradioAPIClient
 
 
 # api_url = "https://16c187ae810a38fd56-dbrx-instruct.test-playground-inference.netmind.ai/"
 # client = dbrx_GradioAPIClient(api_url)
-api_url = "https://2c76d788cbff087d88-llama2-70b.test-playground-inference-2.netmind.ai/"
-client = llama2_GradioAPIClient(api_url)
+# api_url = "https://2c76d788cbff087d88-llama2-70b.test-playground-inference-2.netmind.ai/"
+# client = llama2_GradioAPIClient(api_url)
+#api_url = "https://73274c21adb09f67b3-llama3-8b.test-playground-inference.netmind.ai/"
+api_url = "https://6fc1c573b93ca3ef1b-llama3-70b.test-playground-inference.netmind.ai/"
+#client = llama3_GradioAPIClient(api_url)
 request = """Now, you are a Audit assistant who can help user to extract information from text.
 ## You must follow all the requirements to modify the draft:
     1. You must extract the name of person from the text, including first and last name.
@@ -55,7 +59,7 @@ with open('json/latex_info.json', 'r') as f:
 extract_llama = {}
 idx = 0
 for key in latex_info:
-    client = llama2_GradioAPIClient(api_url)
+    client = llama3_GradioAPIClient(api_url)
     idx += 1
     print(idx)
     status = 0
@@ -73,5 +77,5 @@ for key in latex_info:
             time.sleep(10)
             status = 0
 
-with open('json/extract_llama2.json', 'w') as f:
+with open('json/extract_llama3_70b.json', 'w') as f:
     json.dump(extract_llama, f)

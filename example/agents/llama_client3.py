@@ -88,7 +88,7 @@ class llama3_GradioAPIClient:
 
 # Example of using the GradioAPIClient
 if __name__ == "__main__":
-    api_url = "https://ff877aa74034a0ee21-llama3-8b.test-playground-inference.netmind.ai/"
+    api_url = "https://73274c21adb09f67b3-llama3-8b.test-playground-inference.netmind.ai/"
     client = llama3_GradioAPIClient(api_url)
     response = client.run(
         message="""
