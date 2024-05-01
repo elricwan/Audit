@@ -42,10 +42,6 @@ class MathpixProcessor(Agent):
         if content_type:
             self.headers["Content-type"] = content_type
 
-        self.set_name("MathpixProcessor")
-        self.set_description("This is a function convert image to latex")
-        self.set_parameters({"image_path": {"type": "str", "description": "This is the path of image"}})
-
     def flowing(self, image_path: str) -> tuple[str, list[np.array]]:
         """function for recognizing text in image using mathpix text api and crop out images
 

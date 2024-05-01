@@ -33,16 +33,11 @@ class Gen_pdf(Agent):
         
         super().__init__()  
 
-        self.set_name("bank_statementGenerator")
-        self.set_description("This is a pdf generator to generate pdf given html template.")
-        self.set_parameters({"pdf_path": {"type": "str", "description": "The path to store pdf."},
-                             "img_path": {"type": "str", "description": "The path to store img."},
-                             "html_path": {"type": "str", "description": "The path to load trml template."}})
 
         self.openai_agent = OpenAIClient(api_key=OPENAI_API_KEY, model='gpt-4-0125-preview', temperature=0.7, top_p=0.8,
                                          max_tokens=2096)
-        self.llm_bank_agent = LLMAgent(BANK_INFO, self.openai_agent, inner_multi=False, stream=False)
-        self.llm_loan_agent = LLMAgent(LOAN_INFO, self.openai_agent, inner_multi=False, stream=False)
+        self.llm_bank_agent = LLMAgent(BANK_INFO, self.openai_agent, stream=False)
+        self.llm_loan_agent = LLMAgent(LOAN_INFO, self.openai_agent, stream=False)
 
     def pdftopages(self,pdf_path):
         """Input: PDF Filepath, Output: List of Page objects."""
