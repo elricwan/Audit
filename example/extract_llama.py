@@ -15,7 +15,6 @@ from agents.llama_client3 import llama3_GradioAPIClient
 # client = dbrx_GradioAPIClient(api_url)
 # api_url = "https://2c76d788cbff087d88-llama2-70b.test-playground-inference-2.netmind.ai/"
 # client = llama2_GradioAPIClient(api_url)
-#api_url = "https://73274c21adb09f67b3-llama3-8b.test-playground-inference.netmind.ai/"
 api_url = "https://6fc1c573b93ca3ef1b-llama3-70b.test-playground-inference.netmind.ai/"
 #client = llama3_GradioAPIClient(api_url)
 request = """Now, you are a Audit assistant who can help user to extract information from text.
